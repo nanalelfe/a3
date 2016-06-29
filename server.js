@@ -11,6 +11,23 @@ function send404Response(response) {
 	response.end();
 }
 
+function capitalize_name(string) {
+	var split = string.split(" ");
+	for (var i = 0; i < split.length; i++) {
+		split[i] = split[i].trim();
+		if (split[i].indexOf(".") > -1) {
+			split[i] = split[i].toUpperCase();
+		}
+
+		else if (split[i].length > 2) {
+			split[i] = split[i].charAt(0).toUpperCase() + split[i].slice(1);
+		}
+	}
+
+	return split.join(" ");
+
+}
+
 function onRequest (request, response) {
 
 	var file_path = '.' + request.url;
@@ -42,9 +59,21 @@ function onRequest (request, response) {
 		
 		var obj = JSON.parse(data);
 
-		response.write(JSON.stringify(obj[0].results));
+		var articles = [];
+
+		obj[0].results.forEach(function (article) {
+			var details = {
+				"published_date" : article.published_date,
+				"title" : article.title,
+				"abstract" : article.abstract,
+				"url" : article.url
+			};
+
+			articles.push(details);
+		});
+
+		response.write(JSON.stringify(articles));
 		response.end();
-		console.log(obj);
 	}
 
 	else if (request.method == 'GET' && request.url == "/get_authors") {
@@ -56,31 +85,32 @@ function onRequest (request, response) {
 
 		var arr = [];
 		obj[0].results.forEach(function(article) {
-			var names = article.byline.substring(3).toUpperCase();
+			var names = article.byline.substring(3).toLowerCase();
 
 			// Case: Multiple names 
-			if (names.includes(" AND ")) {
-				var strings = names.split(" AND ");
+			if (names.includes(" and ")) {
+				var strings = names.split(" and ");
 				strings.forEach(function(name) {
 					// CASE: NAME, NAME AND NAME
 					if (name.includes(",")){
 						var strings2 = name.split(",");
 						strings2.forEach(function (name) {
-							name.trim();
+							name = name.trim();
 							if (name !== "") {
-								arr.push(name);
+								arr.push({"name": capitalize_name(name)});
 							}
 						});
 					// CASE: NAME AND NAME
 					} else {
-						arr.push(name);
+						arr.push({"name": capitalize_name(name)});
 					}
 					
 				});
 
 			// Case: one name only
 			} else {
-				arr.push(names);
+				
+				arr.push({"name": capitalize_name(names)});
 			}
 
 		});
@@ -94,7 +124,7 @@ function onRequest (request, response) {
 		var data = fs.readFileSync("file.js");
 		var obj = JSON.parse(data);
 
-		var dates_urls= {};
+		var dates_urls = {};
 		obj[0].results.forEach(function (article) {
 			var pub_date = article.published_date;
 			var url = article.short_url;
@@ -106,7 +136,7 @@ function onRequest (request, response) {
 		});
 		//console.log(dates_urls);
 
-		
+		console.log(dates_urls);
 		response.write(JSON.stringify(dates_urls));
 		response.end();
 
@@ -133,12 +163,13 @@ function onRequest (request, response) {
 		console.log(tags);
 		tags["total"] = total;
 
+		console.log(tags);
 		response.write(JSON.stringify(tags));
 		response.end();
 
 	}
 
-	else if (request.method == 'GET' && request.url == "/get_details") {
+	else if (request.method == 'GET' && request.url == "/get_index") {
 		response.setHeader('Content-Type', 'application/json');
 		var data = fs.readFileSync("file.js");
 		var obj = JSON.parse(data);
@@ -149,7 +180,7 @@ function onRequest (request, response) {
 
 	}
 
-	else if (request.method == 'GET' && request.url.slice(0, 10) == "/get_index") {
+	else if (request.method == 'GET' && request.url.slice(0, 12) == "/get_details") {
 		response.setHeader('Content-Type', 'application/json');
 		var data = fs.readFileSync("file.js");
 		var obj = JSON.parse(data);

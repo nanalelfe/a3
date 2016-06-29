@@ -44,9 +44,9 @@ var main = function () {
 				$results.html('');
 
 				var $ul = $("<ul>");
-				response.forEach(function (name) {
+				response.forEach(function (name_obj) {
 					var $li = $("<li>");
-					$li.text(name);
+					$li.text(name_obj["name"]);
 					$ul.append($li);
 				});
 				$ul.appendTo($results);
@@ -109,9 +109,9 @@ var main = function () {
 		});
 	});
 
-	$('#get_details').on('click', function() {
+	$('#get_index').on('click', function() {
 		$.ajax({
-			url: "/get_details",
+			url: "/get_index",
 			contentType: "application/json",
 			success: function (response) {
 				$("#info").html('');
@@ -128,7 +128,7 @@ var main = function () {
 				}
 
 
-				var $button = $("<button>").attr("id", "get_index");
+				var $button = $("<button>").attr("id", "get_details");
 				$button.text("GET ARTICLE WITH INDEX").appendTo("#info");
 
 				var $warning = $("<p>").attr("id", "warning").text("Please choose an index between 0 and " + (response.obj_num - 1) + ".");
@@ -141,11 +141,11 @@ var main = function () {
 		});
 	});
 
-	$('#info').on('click', '#get_index', function() {
+	$('#info').on('click', '#get_details', function() {
 		var index = $('select').val();
 		console.log(index);
 		$.ajax({
-			url: "/get_index",
+			url: "/get_details",
 			dataType: "json",
 			contentType: "application/json",
 			method: 'GET',
