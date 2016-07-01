@@ -1,0 +1,446 @@
+<!doctype html>
+
+<html>
+	<head>
+		<meta charset="UTF-8">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>The New York Times - Restful API</title>
+
+		<!-- Style sheets and fonts -->
+		<link href="assets/css/style.css" rel="stylesheet" type="text/css">
+		<link href='https://fonts.googleapis.com/css?family=Rokkitt:400,700' rel='stylesheet' type='text/css'>
+
+		<!-- Script files -->
+		<script type="text/javascript" src="assets/scripts/jquery-3.0.0.min.js" defer></script>
+		<script type="text/javascript" src="assets/scripts/front.js" defer></script>
+	</head>
+	<body>
+
+		<header class="divider">
+			<div class="move">
+				<h1><span>The New York Times</span> - RESTful API</h1>
+			</div>
+		</header>
+
+		<!-- NAVIGATION MENU BEGIN -->
+		<!-- Main Nav links, click to open appropriate sub menus -->
+		<nav id="main_menu" class="divider">
+			<ul>
+				<li id="usage"><a>Usage Instructions</a></li>
+				<li id="demo"><a>Demo</a></li>
+			</ul>
+		</nav>		
+
+		<!-- Usage sub menu, appears when "Usage Instructions active -->
+		<nav class="menu divider" id="nav_usage">
+			<ul>
+				<li id="us_articles"><a> Show Articles</a></li>
+				<li id="us_authors"><a>Show Authors</a></li>
+				<li id="us_urls"><a>Show Article URLs</a></li>
+				<li id="us_tags"><a>Show Tags</a></li>
+				<li id="us_index"><a>Show Article with Index</a></li>
+				<li id="us_imgs"><a>Show Articles With Images</a></li>
+			</ul>
+		</nav>	
+
+		<!-- Specification Menu:
+			 the divider class is needed to be able to set everything to 100%
+			 for the mobile version -->
+		<nav class="menu divider" id="nav_demo">
+			<ul>
+				<li id="get_articles"><a>Articles</a></li>
+				<li id="get_authors"><a>Authors</a></li>
+				<li id="get_urls"><a>Article URLs</a></li>
+				<li id="get_tags"><a>Tags</a></li>
+				<li id="get_index"><a>Article with Index</a></li>
+				<li id="get_imgs"><a>Articles with Images</a></li>
+			</ul>
+		</nav>
+
+
+		<!-- MAIN TEXT  -->
+		<main class="divider main_text">
+
+			<!-- USAGE Tabulated TEXT -->
+			<div id="usage-articles">
+				<h2>Show All Articles</h2>
+			<table  align="center">
+				<tr>
+					<th>Description</th>
+					<td>Returns all articles' title, published date, brief description (abstract) and short url.</td>
+				</tr>
+				<tr>
+					<th>URL</th>
+					<td>/articles</td>
+				</tr>
+				<tr>
+					<th>Method</th>
+					<td>GET</td>
+				</tr>
+				<tr>
+					<th>URL Parameters</th>
+					<td>None</td>
+				</tr>
+				<tr>
+					<th>Response format</th>
+					<td>JSON Array</td>
+				</tr>
+				<tr>
+					<th>Success Response</th>
+					<td>
+						<ul>
+							<li><span>Code</span>: 200</li>
+							<li><span>Content</span>: <code>[{"published date": published date, "title" : title, "abstract": list of tags, "url": article url}, {...}]</code></li>
+							<li><span>Sample Content</span>: <code>[ {</br>
+											"published_date":"2016-06-22T00:00:00-04:00",</br>
+											"title":"Goodbye, Password. Banks Opt to Scan Fingers and Faces Instead.",</br>
+											"abstract":"Frustrated by thieves stealing personal data from millions of </br>customers",</br>
+											"url":"http://www.nytimes.com/2016/06/22/business/dealbook/goodbye-password-</br>banks-opt-to-scan-fingers-and-faces-instead.html"</br>
+											}]</code></li>			
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<th>Error Response</th>
+					<td> 
+						<ul>
+							<li><span>Code</span>: Error 404 - Page not found</li>
+							<li><span>Content</span>: none</li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<th>Sample Call</th>
+					<td>
+						<code>
+							$.ajax({</br>
+								&nbsp;&nbsp;url: '/articles',</br>
+								&nbsp;&nbsp;contentType: "application/json",</br>
+								&nbsp;&nbsp;success: function(response) {</br>
+								&nbsp;&nbsp;&nbsp;&nbsp;	console.log(response);</br>
+								&nbsp;&nbsp;}</br>
+							});</br>
+						</code>
+					</td>	
+				</tr>
+			</table>
+			</div>
+			<div id="usage-authors">
+
+			<h2>Show All Authors</h2>
+			<table  align="center">
+				<tr>
+					<th>Description</th>
+					<td>Returns a list of all known authors.</td>
+				</tr>
+				<tr>
+					<th>URL</th>
+					<td>/authors</td>
+				</tr>
+				<tr>
+					<th>Method</th>
+					<td>GET</td>
+				</tr>
+				<tr>
+					<th>URL Parameters</th>
+					<td>None</td>
+				</tr>
+				<tr>
+					<th>Response format</th>
+					<td>JSON Object</td>
+				</tr>
+				<tr>
+					<th>Success Response</th>
+					<td>
+						<ul>
+							<li><span>Code</span> : 200</li>
+							<li><span>Content</span>:<code>{"authors" : [author1, author2, ...]}</code></li>
+							<li><span>Sample Content</span>: <code>{"authors":["Michael Corkery"]}</code></li>			
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<th>Error Response</th>
+					<td> 
+						<ul>
+							<li><span>Code</span>: Error 404 - Page not found</li>
+							<li><span>Content</span>: none</li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<th>Sample Call</th>
+					<td>
+						<code>
+							$.ajax({</br>
+								&nbsp;&nbsp;url: '/authors',</br>
+								&nbsp;&nbsp;contentType: "application/json",</br>
+								&nbsp;&nbsp;success: function(response) {</br>
+								&nbsp;&nbsp;&nbsp;&nbsp;	console.log(response);</br>
+								&nbsp;&nbsp;}</br>
+							});</br>
+						</code>
+					</td>	
+				</tr>
+			</table>
+		</div>
+			<div id="usage-urls">
+				<h2>Show All Short URLs</h2>
+				<table  align="center">
+					<tr>
+						<th>Description</th>
+						<td>Returns a list of all articles' short URLS grouped by published date.</td>
+					</tr>
+					<tr>
+						<th>URL</th>
+						<td>/short_urls</td>
+					</tr>
+					<tr>
+						<th>Method</th>
+						<td>GET</td>
+					</tr>
+					<tr>
+						<th>URL Parameters</th>
+						<td>None</td>
+					</tr>
+					<tr>
+						<th>Response format</th>
+						<td>JSON Object</td>
+					</tr>
+					<tr>
+						<th>Success Response</th>
+						<td>
+							<ul>
+								<li><span>Code</span> : 200</li>
+								<li><span>Content</span>: <code>{published date: [article url 1, article url2, ...]}}</code></li>
+								<li><span>Sample Content</span>: <code>{"2016-06-21T00:00:00-04:00":["http://nyti.ms/28J9fyW","http://nyti.ms/28IVUqj","http://nyti.ms/28J6nlF"]}</code></li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<th>Error Response</th>
+						<td>
+							<ul>
+								<li><span>Code</span>: Error 404 - Page not found</li>
+								<li><span>Content</span>: none</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<th>Sample Call</th>
+						<td>
+							<code>
+								$.ajax({</br>
+									&nbsp;&nbsp;url: 'short_urls',</br>
+									&nbsp;&nbsp;contentType: "application/json",</br>
+									&nbsp;&nbsp;success: function(response) {</br>
+									&nbsp;&nbsp;&nbsp;&nbsp;	console.log(response);</br>
+									&nbsp;&nbsp;}</br>
+								});</br>
+							</code>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div id="usage-tags">
+				<h2>Show All Tags</h2>
+				<table  align="center">
+					<tr>
+						<th>Description</th>
+						<td>Returns the tags of all the articles with their corresponding number of appearances.</td>
+					</tr>
+					<tr>
+						<th>URL</th>
+						<td>/tags</td>
+					</tr>
+					<tr>
+						<th>Method</th>
+						<td>GET</td>
+					</tr>
+					<tr>
+						<th>URL Parameters</th>
+						<td>None</td>
+					</tr>
+					<tr>
+						<th>Response format</th>
+						<td>JSON Object</td>
+					</tr>
+					<tr>
+						<th>Success Response</th>
+						<td>
+							<ul>
+								<li><span>Code</span>: 200</li>
+								<li><span>Content</span>: <code>{tag1: # of appearances, tag2: # of appearances, ...}</code></li>
+								<li><span>Sample Content</span>: <code>"Computer Security" : 2, "Banking and Financial Institutions" : 1, "Biometrics" : 1}</code>{</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<th>Error Response</th>
+						<td>
+							<ul>
+								<li><span>Code</span>: Error 404 - Page not found</li>
+								<li><span>Content</span>: none</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<th>Sample Call</th>
+						<td>
+							<code>
+								$.ajax({</br>
+									&nbsp;&nbsp;url: '/tags',</br>
+									&nbsp;&nbsp;contentType: "application/json",</br>
+									&nbsp;&nbsp;success: function(response) {</br>
+									&nbsp;&nbsp;&nbsp;&nbsp;	console.log(response);</br>
+									&nbsp;&nbsp;}</br>
+								});</br>
+							</code>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div id="usage-index">
+				<h2>Show Article With Index</h2>
+				<table  align="center">
+					<tr>
+						<th>Description</th>
+						<td>Given an index, returns the article at that index.</td>
+					</tr>
+					<tr>
+						<th>URL</th>
+						<td>/details?index</td>
+					</tr>
+					<tr>
+						<th>Method</th>
+						<td>GET</td>
+					</tr>
+					<tr>
+						<th>URL Parameters</th>
+						<td>Required: index=[integer]</td>
+					</tr>
+					<tr>
+						<th>Response format</th>
+						<td>JSON Object</td>
+					</tr>
+					<tr>
+						<th>Success Response</th>
+						<td>
+							<ul>
+								<li><span>Code</span> : 200</li>
+								<li><span>Content</span>: <code>{"section": section, "subsection": subsection, "title": title, "abstract": brief description, "byline": authors,
+									"published date": published date, "des_facet": list of tags}</code></li>
+								<li><span>Sample Content</span>: <code>{</br>
+							"section":"Business Day",</br>
+							"subsection":"DealBook",</br>
+							"title":"Goodbye, Password. Banks Opt to Scan Fingers and Faces Instead.",</br>
+							"abstract":"Frustrated by thieves stealing personal data from millions of customers, banks are </br>investing in biometric technology to offer better security.",</br>
+							"byline":"By MICHAEL CORKERY",</br>
+							"published_date":"2016-06-22T00:00:00-04:00",</br>
+							"des_facet":["Computer Security","Banking and Financial Institutions","Biometrics"]</br>
+						}</code></li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<th>Error Response</th>
+						<td>
+							<ul>
+								<li><span>Code</span> : Error 404 - Page not found</li>
+								<li><span>Content</span>: none</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<th>Sample Call</th>
+						<td>
+							<code>
+								$.ajax({</br>
+									&nbsp;&nbsp;url: '/details?index=0',</br>
+									&nbsp;&nbsp;contentType: "application/json",</br>
+									&nbsp;&nbsp;success: function(response) {</br>
+									&nbsp;&nbsp;&nbsp;&nbsp;	console.log(response);</br>
+									&nbsp;&nbsp;}</br>
+								});</br>
+							</code>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div id="usage-images">
+				<h2>Show Article With Image</h2>
+				<table  align="center">
+					<tr>
+						<th>Description</th>
+						<td>Returns the list of all articles' title with their corresponding article URL and image URL.</td>
+					</tr>
+					<tr>
+						<th>URL</th>
+						<td>/image_articles</td>
+					</tr>
+					<tr>
+						<th>Method</th>
+						<td>GET</td>
+					</tr>
+					<tr>
+						<th>URL Parameters</th>
+						<td>None</td>
+					</tr>
+					<tr>
+						<th>Response format</th>
+						<td>JSON Object</td>
+					</tr>
+					<tr>
+						<th>Success Response</th>
+						<td>
+							<ul>
+								<li><span>Code</span> : 200</li>
+								<li><span>Content</span>:<code>{ {title: [article url, image url]}, {...} }</code></li>
+								<li><span>Sample Content</span>:<code>{
+							{
+							"Goodbye, Password. Banks Opt to Scan Fingers and Faces Instead.":["http://www.nytimes.com/2016/06/22/business/dealbook/goodbye-password-banks-opt-to-scan-fingers-and-faces-instead.html","https://static01.nyt.com/images/2016/06/21/business/00DB-BIOMETRICS/00DB-BIOMETRICS-thumbLarge-v2.jpg"]
+							}</code>
+						}</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<th>Error Response</th>
+						<td>
+							<ul>
+								<li><span>Code</span>: Error 404 - Page not found</li>
+								<li><span>Content</span>: none</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<th>Sample Call</th>
+						<td>
+							<code>
+								$.ajax({</br>
+									&nbsp;&nbsp;url: '/tags',</br>
+									&nbsp;&nbsp;contentType: "application/json",</br>
+									&nbsp;&nbsp;success: function(response) {</br>
+									&nbsp;&nbsp;&nbsp;&nbsp;	console.log(response);</br>
+									&nbsp;&nbsp;}</br>
+								});</br>
+							</code>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<!-- SPECIFICATION CONTENT VIA SCRIPT -->
+			<article id="info"></article>
+		</main>	
+
+		<!-- End of page, creditations -->
+		<footer id="topic_footer">
+			<p>Website made by: <a href="https://github.com/nanalelfe" target="_blank" id="name">Nargiza Nosirova</a>.
+			</p>
+		</footer>
+
+		
+	</body>
+</html>
