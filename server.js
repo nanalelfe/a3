@@ -56,7 +56,7 @@ function onRequest (request, response) {
 		fs.createReadStream(file_path).pipe(response);
 	}
 
-	/* Serve all articles from JSON file as a stringified JSON array. */
+	/* Serve all articles from JSON file as a stringified JSON object. */
 	else if (request.method == 'GET' && request.url == "/articles") {
 		response.writeHead(200, {"Content-Type":"application/json"});
 		var data = fs.readFileSync("nytimes.json");
@@ -244,7 +244,7 @@ function onRequest (request, response) {
 					articles[article.title] = [article.url, image.url];
 				}
 			});
-			// Else, we just leave the image url part blank.
+			// Else, we just leave the image url part null.
 			if (!articles[article.title]) {
 				articles[article.title] = [article.url, null];
 			}
@@ -255,6 +255,7 @@ function onRequest (request, response) {
 
 	}
 
+	/* Does not exist - 404 Response */
 	else {
 		response.writeHead(404, {"Context-Type":"text/plain"});
 		response.write("Error 404 - Page not found");
@@ -264,5 +265,4 @@ function onRequest (request, response) {
 }
 
 http.createServer(onRequest).listen(8080);
-console.log("Server is now running...");
 
