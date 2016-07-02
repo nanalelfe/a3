@@ -18,7 +18,7 @@ body {
 section, footer, #info div#url_results{
     border-bottom: solid;
     border-width: 1px;
-    border-color: #FDD2B5;
+    border-color: #fdd2b5;
     padding: 15px;
     padding-left: 20px;
     text-align: center;
@@ -96,6 +96,7 @@ ul {
 
 }
 
+
 [id^='usage-'] {
     display: none;
 }
@@ -107,7 +108,7 @@ header {
     text-align: center;
     border-bottom: solid;
     border-width: 1px;
-    border-color: #FDD2B5;
+    border-color: #fdd2b5;
 }
 
     header img {
@@ -142,7 +143,7 @@ nav {
             color: #ffffff;
             border-bottom: solid;
             border-width: 1px;
-            border-color: #FDD2B5;
+            border-color: #fdd2b5;
             float: left;
             width: 100%;
             text-align: center;
@@ -192,6 +193,16 @@ main {
         color: #3EACA8;
     }
 
+
+a.article_list {
+    text-decoration: none;
+}
+
+    a:hover .article_list {
+        background-color: #F1F1F1;
+        text-decoration: none;
+    }
+
 /* FOOTER */
 
 footer {
@@ -203,7 +214,7 @@ footer {
     bottom: 0;
     border-top: solid;
     border-width: 1px;
-    border-color: #FDD2B5;
+    border-color: #fdd2b5;
     width: 100%;
 
 }
@@ -308,7 +319,7 @@ footer {
         width: 50%;
         border-right: solid;
         border-width: 1px;
-        border-color: #FDD2B5;
+        border-color: #fdd2b5;
     }
 
     #main_menu ul li a {

@@ -257,7 +257,7 @@ function onRequest (request, response) {
 
 	/* Does not exist - 404 Response */
 	else {
-		response.writeHead(404, {"Context-Type":"text/plain"});
+		response.writeHead(404, {"Content-Type":"text/plain"});
 		response.write("Error 404 - Page not found");
 		response.end();
 	}

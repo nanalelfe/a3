@@ -84,20 +84,23 @@
 				</tr>
 				<tr>
 					<th>Response format</th>
-					<td>JSON Array</td>
+					<td>JSON Object</td>
 				</tr>
 				<tr>
 					<th>Success Response</th>
 					<td>
 						<ul>
 							<li><span>Code</span>: 200</li>
-							<li><span>Content</span>: <code>[{"published date": published date, "title" : title, "abstract": list of tags, "url": article url}, {...}]</code></li>
-							<li><span>Sample Content</span>: <code>[ {</br>
+							<li><span>Content</span>: <code>{"articles" : [{"published date": published date, "title" : title, "abstract": list of tags, "url": article url},
+							{...}]}</code></li>
+							<li><span>Sample Content</span>: <code>{"articles" : </br>
+											[{</br>
 											"published_date":"2016-06-22T00:00:00-04:00",</br>
 											"title":"Goodbye, Password. Banks Opt to Scan Fingers and Faces Instead.",</br>
 											"abstract":"Frustrated by thieves stealing personal data from millions of </br>customers",</br>
 											"url":"http://www.nytimes.com/2016/06/22/business/dealbook/goodbye-password-</br>banks-opt-to-scan-fingers-and-faces-instead.html"</br>
-											}]</code></li>			
+											}]</br>
+										}</code></li>			
 						</ul>
 					</td>
 				</tr>
@@ -105,7 +108,7 @@
 					<th>Error Response</th>
 					<td> 
 						<ul>
-							<li><span>Code</span>: Error 404 - Page not found</li>
+							<li><span>Code</span>: 404</li>
 							<li><span>Content</span>: none</li>
 						</ul>
 					</td>
@@ -164,7 +167,7 @@
 					<th>Error Response</th>
 					<td> 
 						<ul>
-							<li><span>Code</span>: Error 404 - Page not found</li>
+							<li><span>Code</span>: 404</li>
 							<li><span>Content</span>: none</li>
 						</ul>
 					</td>
@@ -222,7 +225,7 @@
 						<th>Error Response</th>
 						<td>
 							<ul>
-								<li><span>Code</span>: Error 404 - Page not found</li>
+								<li><span>Code</span>: 404</li>
 								<li><span>Content</span>: none</li>
 							</ul>
 						</td>
@@ -248,7 +251,7 @@
 				<table  align="center">
 					<tr>
 						<th>Description</th>
-						<td>Returns the tags of all the articles with their corresponding number of appearances.</td>
+						<td>Returns the tags of all the articles with their corresponding number of appearances, as well as the total number of tags.</td>
 					</tr>
 					<tr>
 						<th>URL</th>
@@ -271,8 +274,8 @@
 						<td>
 							<ul>
 								<li><span>Code</span>: 200</li>
-								<li><span>Content</span>: <code>{tag1: # of appearances, tag2: # of appearances, ...}</code></li>
-								<li><span>Sample Content</span>: <code>"Computer Security" : 2, "Banking and Financial Institutions" : 1, "Biometrics" : 1}</code>{</li>
+								<li><span>Content</span>: <code>{{"total" : total#, tag1: # of appearances, tag2: # of appearances, ...}</code></li>
+								<li><span>Sample Content</span>: <code>"Computer Security" : 2, "Banking and Financial Institutions" : 1, "Biometrics" : 1,"total" : 37}</code>{</li>
 							</ul>
 						</td>
 					</tr>
@@ -280,7 +283,7 @@
 						<th>Error Response</th>
 						<td>
 							<ul>
-								<li><span>Code</span>: Error 404 - Page not found</li>
+								<li><span>Code</span>: 404</li>
 								<li><span>Content</span>: none</li>
 							</ul>
 						</td>
@@ -347,7 +350,7 @@
 						<th>Error Response</th>
 						<td>
 							<ul>
-								<li><span>Code</span> : Error 404 - Page not found</li>
+								<li><span>Code</span> : 404</li>
 								<li><span>Content</span>: none</li>
 							</ul>
 						</td>
@@ -409,7 +412,7 @@
 						<th>Error Response</th>
 						<td>
 							<ul>
-								<li><span>Code</span>: Error 404 - Page not found</li>
+								<li><span>Code</span>: 404</li>
 								<li><span>Content</span>: none</li>
 							</ul>
 						</td>

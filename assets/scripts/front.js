@@ -1,6 +1,13 @@
 var main = function () {
 	"use strict";
 
+	// Returns a date (String) formatted such that it's human readable.
+	function nice_date(date) {
+		var $nice_date = new Date(date);
+		$nice_date = ($nice_date).toString().slice(0, 15);
+		return $nice_date;
+	}
+
 	/* Show the usage submenu when asked, and hide everything else */
 	$('#usage').on('click', function() {
 		$("#nav_usage").css("display", "block");
@@ -64,7 +71,6 @@ var main = function () {
 			url: '/articles',
 			contentType: "application/json",
 			success: function(response) {
-				console.log(response);
 				var $results = $("#info");
 				var articles = response.articles;
 
@@ -73,23 +79,33 @@ var main = function () {
 				articles.forEach(function (article) {
 					// Create an element for each section
 					// and add it to the DOM
-					var $section = $("<section>");
+
+					// the article is clickable
+					var $anchor = $("<a>")
+								.attr("href", article.url)
+								.attr("target", "_blank")
+								.appendTo("#info")
+								.attr("class", "article_list");
+
+					// We are not showing the url, since the user can retrieve
+					// it by clicking on the article
+
+					var $section = $("<section>").appendTo($anchor)
+												.attr("class", "article_list");
+					
 					var $date = $("<h3>");
 					var $title = $("<h2>");
 					var $abstract = $("<p>");
-					var $url = $("<p>");
 
-					$date.text(article.published_date);
+					// Human readable date
+					var date = nice_date(article.published_date);
+					$date.text(date);
 					$title.text(article.title);
 					$abstract.text(article.abstract);
-					$url.text(article.url);
-
 
 					$section.append($date);
 					$section.append($title);
 					$section.append($abstract);
-					$section.append($url);
-					$("#info").append($section);
 
 				});
 			}
@@ -133,7 +149,9 @@ var main = function () {
 				// Each key is the published date and has a corresponding 
 				// array of short URLs
 				for (var key in response) {
-					$results.append("Published date: " + key);
+					// Human readable date
+					var date = nice_date(key);
+					$results.append("Published date: " + date);
 					// Each of the corresponding short URLs will be in an 
 					// unordered list
 					var $ul = $("<ul>");
@@ -251,7 +269,8 @@ var main = function () {
 				var $abstract = $("<p>");
 				var $tags = $("<p>");
 
-				$date.text("Published date: " + response.published_date);
+				var date = nice_date(response.published_date);
+				$date.text("Published date: " + date);
 				$title.text(response.title);
 				$section.text(response.section);
 				$subsection.text(response.subsection);

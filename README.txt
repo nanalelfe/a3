@@ -12,17 +12,18 @@ USAGE INSTRUCTIONS:
 	- HTTP Request: http://127.0.0.1:8080/articles
 	- URL: /articles
 	- Method: GET
-	- Response format: JSON Array
+	- Response format: JSON Object
 	- Success Response:
 		- Code: 200
-		- Content: [{"published date": published date, "title" : title, "abstract": list of tags, "url": article url},
-					{...}]
-		- Sample Content: [ {
+		- Content: {"articles" : [{"published date": published date, "title" : title, "abstract": list of tags, "url": article url},
+					{...}]}
+		- Sample Content: { 
+					"articles" : [ {
 						"published_date":"2016-06-22T00:00:00-04:00",
 						"title":"Goodbye, Password. Banks Opt to Scan Fingers and Faces Instead.",
 						"abstract":"Frustrated by thieves stealing personal data from millions of customers",
 						"url":"http://www.nytimes.com/2016/06/22/business/dealbook/goodbye-password-banks-opt-to-scan-fingers-and-faces-instead.html"
-					}]
+					}]}
 	- Error Response:
 		- Code: Error 404 - Page not found
 		- Content: none
@@ -81,15 +82,15 @@ USAGE INSTRUCTIONS:
 		});
 
 4) SHOW ALL TAGS
-	- Description: Returns the tags of all the articles with their corresponding number of appearances. 
+	- Description: Returns the tags of all the articles with their corresponding number of appearances, as well as the total number of tags. 
 	- HTTP Request: http://127.0.0.1:8080/tags
 	- URL: /tags
 	- Method: GET
 	- Response format: JSON Object
 	- Success Response:
 		- Code: 200
-		- Content: {tag1: # of appearances, tag2: # of appearances, ...}
-		- Sample Content: {"Computer Security" : 2, "Banking and Financial Institutions" : 1, "Biometrics" : 1}
+		- Content: {"total" : total#, tag1: # of appearances, tag2: # of appearances, ...}
+		- Sample Content: {"Computer Security" : 2, "Banking and Financial Institutions" : 1, "Biometrics" : 1 , "total" : 37}
 	- Error Response
 		- Code: Error 404 - Page not found
 		- Content: none
