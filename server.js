@@ -32,7 +32,7 @@ function onRequest (request, response) {
 	// Serve HTML page
 	if (request.method == 'GET' && file_path == './') {
 		response.writeHead(200, {"Content-Type": content_type});
-		fs.createReadStream("a3.html").pipe(response);
+		fs.createReadStream("index.html").pipe(response);
 	} 
 
 	// Serve Javascript and jQuery files
