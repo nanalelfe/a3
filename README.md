@@ -5,7 +5,7 @@ A set of RESTful APIs capable of reading the JSON file from the New York Times o
 
 ### Show All Articles
 
-```HTML
+
 <table  align="center">
 	<tr>
 		<th>Description</th>
@@ -70,12 +70,11 @@ A set of RESTful APIs capable of reading the JSON file from the New York Times o
 		</td>	
 	</tr>
 </table>
-```
 		
 
 
 ### Show All Authors
-```HTML
+
 <table  align="center">
 				<tr>
 					<th>Description</th>
@@ -131,10 +130,10 @@ A set of RESTful APIs capable of reading the JSON file from the New York Times o
 					</td>	
 				</tr>
 			</table>
-```
+
 
 ### Show All Short URLs
-```HTML
+
 <table  align="center">
 					<tr>
 						<th>Description</th>
@@ -190,10 +189,10 @@ A set of RESTful APIs capable of reading the JSON file from the New York Times o
 						</td>
 					</tr>
 				</table>
-```
+
 
 ### Show Tags
-```HTML
+
 <table  align="center">
 					<tr>
 						<th>Description</th>
@@ -249,11 +248,10 @@ A set of RESTful APIs capable of reading the JSON file from the New York Times o
 						</td>
 					</tr>
 				</table>
-```
+
 
 ### Show Article with Index
 
-```HTML
 <table  align="center">
 					<tr>
 						<th>Description</th>
@@ -318,10 +316,10 @@ A set of RESTful APIs capable of reading the JSON file from the New York Times o
 						</td>
 					</tr>
 				</table>
-```
+
 
 ### Show Articles With Images
-```HTML
+
 <table  align="center">
 					<tr>
 						<th>Description</th>
@@ -370,18 +368,22 @@ A set of RESTful APIs capable of reading the JSON file from the New York Times o
 						<th>Sample Call</th>
 						<td>
 							<code>
+							
 								$.ajax({</br>
+						
 									&nbsp;&nbsp;url: '/tags',</br>
 									&nbsp;&nbsp;contentType: "application/json",</br>
 									&nbsp;&nbsp;success: function(response) {</br>
 									&nbsp;&nbsp;&nbsp;&nbsp;	console.log(response);</br>
 									&nbsp;&nbsp;}</br>
+							
 								});</br>
+								
 							</code>
 						</td>
 					</tr>
 				</table>
-```
+
 
 
 
