@@ -1,6 +1,17 @@
 # The New York Times - RESTful API
 A set of RESTful APIs capable of reading the JSON file from the New York Times official API, deployed on a Node.js server.
 
+## Installation
+
+In order to view a demo of the requests, [click here.](https://nyt-restful-api.herokuapp.com/)
+
+To install manually:
+* Clone the repository into your desired directory.
+* Install Node.js.
+* Type ```$node server``` into the terminal within the directory.
+* Connect to ```localhost:8080```.
+
+
 ## Usage Intructions
 
 ### Show All Articles
